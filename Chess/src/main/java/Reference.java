@@ -12,17 +12,6 @@ public class Reference {
     static final String
         BLACK_SQUARE = "BLACK_S",
         WHITE_SQUARE = "WHITE_S";
-
-
-//    enum figureId{
-//        PAWN,
-//        ROOK,
-//        BISHOP,
-//        KNIGHT,
-//        QUEEN,
-//        KING
-//    }
-
     @Getter
     @Setter
     static class PlaceHolderClass {
@@ -41,36 +30,13 @@ public class Reference {
         }
     }
 
-    /*
-    @Getter
-    @Setter
-    static class FigureHolder {
-        private int positionIndex;
-        private String figureID;
-        private String figureName;
-        private String figureColor;
-
-        FigureHolder(int positionIndex, final String figureID, String figureName, String figureColor) {
-            this.positionIndex = positionIndex;
-            this.figureID = figureID;
-            this.figureName = figureName;
-            this.figureColor = figureColor;
-        }
-
-        ArrayList<Integer> getAllowedPositionsIndex() {
-
-        }
-    }
-    */
-
     static ArrayList<PlaceHolderClass> placeHolderArrayList = new ArrayList<>();
     static ArrayList<figures.IFigureHolder> existingFigures = new ArrayList<>();
     static int hlHoveredSquare = 0;
     static int hlSelectedFigure = 0;
     static int[] hlSelectedSquare = new int[]{0,0};
     static boolean toggleHeightLightedPlace = false;
-    static FieldInit fieldInitBlackRef;
-    static FieldInit fieldInitWhiteRef;
+    static FieldInit fieldInitRef;
     static FigureInit figureInitRef;
     @Getter
     static class Canvas {

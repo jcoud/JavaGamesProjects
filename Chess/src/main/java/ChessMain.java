@@ -28,8 +28,7 @@ public class ChessMain{
     }
     private void setupReference(){
         Reference.figureInitRef = new FigureInit();
-        Reference.fieldInitBlackRef = new FieldInit(Reference.BLACK_SQUARE);
-        Reference.fieldInitWhiteRef = new FieldInit(Reference.WHITE_SQUARE);
+        Reference.fieldInitRef = new FieldInit();
     }
     public static void main(String[] args){ new ChessMain(); }
 }

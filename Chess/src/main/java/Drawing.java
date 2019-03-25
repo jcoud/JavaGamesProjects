@@ -12,8 +12,7 @@ public class Drawing extends JComponent {
         Graphics2D g2 = (Graphics2D) g;
         setBounds(Reference.Canvas.x0, Reference.Canvas.y0, Reference.Canvas.width, Reference.Canvas.height);
 //        grid(g2);
-        Reference.fieldInitBlackRef.drawing(g2);
-        Reference.fieldInitWhiteRef.drawing(g2);
+        Reference.fieldInitRef.drawing(g2);
         Reference.figureInitRef.drawing(g2);
         squareSelection(g2);
         i++;
