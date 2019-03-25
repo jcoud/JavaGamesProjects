@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -78,7 +79,7 @@ class MouseAndKeys {
 //                    }
 //                });
 //
-
+//            drawing.dd((Graphics2D) drawing.getGraphics(), true);
             drawing.repaint();
         }
     }

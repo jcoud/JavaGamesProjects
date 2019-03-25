@@ -6,18 +6,20 @@ import java.awt.Graphics2D;
 
 public class Drawing extends JComponent {
     private static final int _BS_ = Reference.BS;
+    int i =0;
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        super.paintComponent(g2);
         setBounds(Reference.Canvas.x0, Reference.Canvas.y0, Reference.Canvas.width, Reference.Canvas.height);
 //        grid(g2);
-
-        Reference.fieldInitBlackRef.paint(g2);
-        Reference.fieldInitWhiteRef.paint(g2);
-        Reference.figureInitRef.paint(g2);
+        Reference.fieldInitBlackRef.drawing(g2);
+        Reference.fieldInitWhiteRef.drawing(g2);
+        Reference.figureInitRef.drawing(g2);
         squareSelection(g2);
+        i++;
+        System.out.println(i);
     }
+
     private void squareSelection(Graphics2D g){
         Reference.placeHolderArrayList.forEach(square -> {
             if (square.getPositionIndex() == Reference.hlSelectedSquare[1]) {
@@ -29,8 +31,6 @@ public class Drawing extends JComponent {
                 g.setStroke(new BasicStroke(1));
             }
             if (Reference.toggleHeightLightedPlace) {
-
-
                 if (square.getPositionIndex() == Reference.hlSelectedSquare[0]) {
                     g.setColor(new Color(130, 230, 255, 70));
                     g.fillRect(square.getPositionPoint().x * _BS_, square.getPositionPoint().y * _BS_, _BS_, _BS_);
