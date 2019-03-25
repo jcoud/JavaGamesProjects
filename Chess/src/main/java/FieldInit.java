@@ -13,8 +13,9 @@ class FieldInit {
                         index,
                         new Point(i, j),
                         Reference.BLACK_SQUARE,
-                        "empty",
-                        "none"
+                        null,
+                        null,
+                        null
                     )
                 );
                 else if (i % 2 == 0 && (j+1) % 2 == 0) Reference.placeHolderArrayList.add(
@@ -22,8 +23,9 @@ class FieldInit {
                         index,
                         new Point(i, j),
                         Reference.BLACK_SQUARE,
-                        "empty",
-                        "none"
+                        null,
+                        null,
+                        null
                     )
                 );
             }
@@ -36,8 +38,9 @@ class FieldInit {
                         index,
                         new Point(i, j),
                         Reference.WHITE_SQUARE,
-                        "empty",
-                        "none"
+                        null,
+                        null,
+                        null
                     )
                 );
                 else if ((i+1) % 2 == 0 && (j+1) % 2 == 0) Reference.placeHolderArrayList.add(
@@ -45,8 +48,9 @@ class FieldInit {
                         index,
                         new Point(i, j),
                         Reference.WHITE_SQUARE,
-                        "empty",
-                        "none"
+                        null,
+                        null,
+                        null
                     )
                 );
             }
@@ -56,7 +60,7 @@ class FieldInit {
         Reference.placeHolderArrayList.forEach( (p) -> {
             if (p.getSquareColorName().equals(Reference.BLACK_SQUARE)) g.setColor(Color.decode("#fadcc2"));         //fadcc2
             if (p.getSquareColorName().equals(Reference.WHITE_SQUARE)) g.setColor(Color.decode("#b58869"));         //b58869
-            g.fillRect(p.getPositionPoint().x * _BS_, p.getPositionPoint().y * _BS_, _BS_, _BS_);
+            g.fillRect(p.getSquarePositionPoint().x * _BS_, p.getSquarePositionPoint().y * _BS_, _BS_, _BS_);
         });
     }
 }

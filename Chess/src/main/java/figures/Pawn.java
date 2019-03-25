@@ -1,18 +1,17 @@
 package figures;
 
-import lombok.Getter;
-
+import java.awt.Point;
 import java.util.ArrayList;
 
 
 public class Pawn extends IFigureHolder {
-    public Pawn(int positionIndex, String figureID, String uniqueNameInfo, String figureColor) {
+    public Pawn(int positionIndex, Point positionPoint, String figureID, String uniqueNameInfo, String figureColor) {
         this.positionIndex = positionIndex;
+        this.positionPoint = positionPoint;
         this.figureID = figureID;
         this.figureName = figureID + " " + uniqueNameInfo;
         this.figureColor = figureColor;
     }
-
     @Override
     public ArrayList<Integer> getAllowedPositionsIndex() {
         ArrayList<Integer> temp = new ArrayList<>();

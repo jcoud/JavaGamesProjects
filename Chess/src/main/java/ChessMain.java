@@ -27,8 +27,8 @@ public class ChessMain{
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     private void setupReference(){
-        Reference.figureInitRef = new FigureInit();
         Reference.fieldInitRef = new FieldInit();
+        Reference.figureInitRef = new FigureInit();
     }
     public static void main(String[] args){ new ChessMain(); }
 }

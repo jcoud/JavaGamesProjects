@@ -3,6 +3,7 @@ package figures;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,6 +12,7 @@ import java.util.Collections;
 public abstract class IFigureHolder {
 
     int positionIndex;
+    Point positionPoint;
     String figureID;
     String figureName;
     String figureColor;

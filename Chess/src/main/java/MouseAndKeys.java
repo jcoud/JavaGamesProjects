@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -20,8 +19,8 @@ class MouseAndKeys {
         @Override
         public void mouseMoved(MouseEvent mouse) {
             Reference.placeHolderArrayList.forEach((square) -> {
-                if (mouse.getX() > square.getPositionPoint().x * _BS_  && mouse.getX() < square.getPositionPoint().x * _BS_ + _BS_ )
-                    if (mouse.getY() > square.getPositionPoint().y * _BS_  && mouse.getY() < square.getPositionPoint().y * _BS_ + _BS_ )
+                if (mouse.getX() > square.getSquarePositionPoint().x * _BS_  && mouse.getX() < square.getSquarePositionPoint().x * _BS_ + _BS_ )
+                    if (mouse.getY() > square.getSquarePositionPoint().y * _BS_  && mouse.getY() < square.getSquarePositionPoint().y * _BS_ + _BS_ )
                         Reference.hlHoveredSquare = square.getPositionIndex();
             });
             drawing.repaint();
@@ -32,8 +31,8 @@ class MouseAndKeys {
         @Override
         public void mousePressed(MouseEvent mouse) {
             Reference.placeHolderArrayList.forEach(square -> {
-                if (mouse.getX() > square.getPositionPoint().x * _BS_  && mouse.getX() < square.getPositionPoint().x * _BS_ + _BS_ )
-                    if (mouse.getY() > square.getPositionPoint(). y * _BS_  && mouse.getY() < square.getPositionPoint().y * _BS_ + _BS_ )
+                if (mouse.getX() > square.getSquarePositionPoint().x * _BS_  && mouse.getX() < square.getSquarePositionPoint().x * _BS_ + _BS_ )
+                    if (mouse.getY() > square.getSquarePositionPoint(). y * _BS_  && mouse.getY() < square.getSquarePositionPoint().y * _BS_ + _BS_ )
                         pt = square.getPositionIndex();
             });
             if (Reference.hlSelectedSquare[0] != pt && Reference.hlSelectedSquare[1] != pt) {
@@ -59,8 +58,9 @@ class MouseAndKeys {
                     if (square.getPositionIndex() == Reference.hlSelectedSquare[0]) {
                         System.out.println("=======================");
                         System.out.println(square.getPositionIndex());
-                        System.out.println(square.getPositionPoint());
+                        System.out.println(square.getSquarePositionPoint());
                         System.out.println(square.getSquareColorName());
+                        System.out.println(square.getFigurePositionPoint());
                         System.out.println(square.getFigureName());
                         System.out.println(square.getFigureColor());
                     }

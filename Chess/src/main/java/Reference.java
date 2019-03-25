@@ -16,20 +16,31 @@ public class Reference {
     @Setter
     static class PlaceHolderClass {
         private int positionIndex;
-        private Point positionPoint;
+        private Point
+            squarePositionPoint,
+            figurePositionPoint;
         private String
             squareColorName,
             figureName,
             figureColor;
-        PlaceHolderClass(int positionIndex, Point positionPoint, String squareColorName, String figureName, String figureColor) {
+        PlaceHolderClass(int positionIndex, Point squarePositionPoint, String squareColorName, Point figurePositionPoint, String figureName, String figureColor) {
             this.positionIndex = positionIndex;
-            this.positionPoint = positionPoint;
+            this.squarePositionPoint = squarePositionPoint;
             this.squareColorName = squareColorName;
+            this.figurePositionPoint = figurePositionPoint;
             this.figureName = figureName;
             this.figureColor = figureColor;
         }
-    }
 
+    }
+    static Point getPointFromIndex(int index){
+        for (Reference.PlaceHolderClass square : Reference.placeHolderArrayList) {
+            if (square.getPositionIndex() == index) {
+                return square.getSquarePositionPoint();
+            }
+        }
+        return new Point();
+    }
     static ArrayList<PlaceHolderClass> placeHolderArrayList = new ArrayList<>();
     static ArrayList<figures.IFigureHolder> existingFigures = new ArrayList<>();
     static int hlHoveredSquare = 0;
@@ -46,8 +57,8 @@ public class Reference {
         width = BS * 8,
         height = BS * 8;
     }
-    static PlaceHolderClass squareInit(int positionIndex, Point positionPoint, String squareColorName, String figureName, String figureColor) {
-        return new PlaceHolderClass(positionIndex, positionPoint, squareColorName, figureName, figureColor);
+    static PlaceHolderClass squareInit(int positionIndex, Point squarePositionPoint, String squareColorName, Point figurePositionPoint, String figureName, String figureColor) {
+        return new PlaceHolderClass(positionIndex, squarePositionPoint, squareColorName, figurePositionPoint, figureName, figureColor);
     }
     static void updateField(){
         existingFigures.forEach(figure -> {
