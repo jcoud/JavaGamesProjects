@@ -56,10 +56,10 @@ class FieldInit {
             }
         }
     }
-    void paint(Graphics2D g){
+    void drawing(Graphics2D g){
         Reference.placeHolderArrayList.forEach( (p) -> {
-            if (p.getSquareColorName().equals(Reference.BLACK_SQUARE)) g.setColor(Color.BLACK);
-            if (p.getSquareColorName().equals(Reference.WHITE_SQUARE)) g.setColor(Color.LIGHT_GRAY);
+            if (p.getSquareColorName().equals(Reference.BLACK_SQUARE)) g.setColor(Color.decode("#fadcc2"));         //fadcc2
+            if (p.getSquareColorName().equals(Reference.WHITE_SQUARE)) g.setColor(Color.decode("#b58869"));         //b58869
             g.fillRect(p.getPositionPoint().x * _BS_, p.getPositionPoint().y * _BS_, _BS_, _BS_);
         });
     }

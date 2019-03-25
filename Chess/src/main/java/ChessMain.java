@@ -6,10 +6,10 @@ public class ChessMain{
     {
         setupReference();
         JFrame window = new JFrame();
-        JFrame.setDefaultLookAndFeelDecorated(true);
+//        JFrame.setDefaultLookAndFeelDecorated(true);
         drawing = new Drawing();
         drawing.addMouseListener(new MouseAndKeys.MouseIOAdapter());
-        drawing.addMouseMotionListener(new MouseAndKeys.MouseIOMotionAdapter());
+//        drawing.addMouseMotionListener(new MouseAndKeys.MouseIOMotionAdapter());
         window.setTitle("The Chess");
         window.add(drawing);
         window.addKeyListener(new MouseAndKeys.KeysIO());
@@ -19,6 +19,7 @@ public class ChessMain{
                 Reference.Canvas.y0 + Reference.Canvas.height
             )
         );
+
         window.setVisible(true);
         window.setResizable(false);
         window.pack();
