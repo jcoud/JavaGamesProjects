@@ -44,42 +44,27 @@ class MouseAndKeys {
                 Reference.hlSelectedSquare[1] = Reference.hlSelectedSquare[0];
                 Reference.toggleHeightLightedPlace = !Reference.toggleHeightLightedPlace;
             }
+            Reference.existingFigures.forEach(figure -> {
+                if (Reference.toggleHeightLightedPlace) {
+                    if (figure.getPositionIndex() == Reference.hlSelectedSquare[0]) {
+                        Reference.hlSelectedFigure = Reference.hlSelectedSquare[0];
 
-                Reference.existingFigures.forEach(figure -> {
-                    if (Reference.toggleHeightLightedPlace) {
-                        if (figure.getPositionIndex() == Reference.hlSelectedSquare[0]) {
-                            Reference.hlSelectedFigure = Reference.hlSelectedSquare[0];
-
-                            Reference.updateField();
-                        }
-                    } else
-                        Reference.hlSelectedFigure = 0;
-
+                        Reference.updateField();
+                    }
+                } else
+                    Reference.hlSelectedFigure = 0;
+            });
+            System.out.println(Reference.hlSelectedSquare[0] + " " + Reference.hlSelectedSquare[1]);
+                Reference.placeHolderArrayList.forEach(square -> {
+                    if (square.getPositionIndex() == Reference.hlSelectedSquare[0]) {
+                        System.out.println("=======================");
+                        System.out.println(square.getPositionIndex());
+                        System.out.println(square.getPositionPoint());
+                        System.out.println(square.getSquareColorName());
+                        System.out.println(square.getFigureName());
+                        System.out.println(square.getFigureColor());
+                    }
                 });
-
-//            if (Reference.toggleHeightLightedPlace) {
-//                Reference.existingFigures.forEach(figure -> {
-//                    if (figure.getPositionIndex() == Reference.hlSelectedFigure) {
-//                        figure.setPositionIndex(Reference.hlSelectedFigure);
-//                        Reference.updateField();
-//                    }
-//                });
-//            }
-
-//            System.out.println(Reference.hlSelectedSquare[0] + " " + Reference.hlSelectedSquare[1]);
-//
-//                Reference.placeHolderArrayList.forEach(square -> {
-//                    if (square.getPositionIndex() == Reference.hlSelectedSquare[0]) {
-//                        System.out.println("=======================");
-//                        System.out.println(square.getPositionIndex());
-//                        System.out.println(square.getPositionPoint());
-//                        System.out.println(square.getSquareColorName());
-//                        System.out.println(square.getFigureName());
-//                        System.out.println(square.getFigureColor());
-//                    }
-//                });
-//
-//            drawing.dd((Graphics2D) drawing.getGraphics(), true);
             drawing.repaint();
         }
     }

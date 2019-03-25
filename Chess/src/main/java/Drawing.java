@@ -17,7 +17,7 @@ public class Drawing extends JComponent {
         Reference.figureInitRef.drawing(g2);
         squareSelection(g2);
         i++;
-        System.out.println(i);
+//        System.out.println(i);
     }
 
     private void squareSelection(Graphics2D g){
