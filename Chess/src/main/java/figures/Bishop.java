@@ -12,12 +12,12 @@ public class Bishop extends IFigureHolder {
     @Override
     public ArrayList<Integer> getAllowedPositionsIndex() {
         ArrayList<Integer> temp = new ArrayList<>();
-        if (this.figureColor.equals(BLACK_FIGURE)) {
-            for (int i = this.positionIndex; i >= 0; i=-9) {temp.add(i);}
-            for (int i = this.positionIndex; i <= 64; i=+9) {temp.add(i);}
-        } else {
-
-        }
+//        if (this.figureColor.equals(BLACK_FIGURE)) {
+//            for (int i = this.positionIndex; i >= 0; i=-9) {temp.add(i);}
+//            for (int i = this.positionIndex; i <= 64; i=+9) {temp.add(i);}
+//        } else {
+//
+//        }
         return temp;
     }
 }

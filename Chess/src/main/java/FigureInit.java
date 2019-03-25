@@ -67,10 +67,6 @@ class FigureInit {
     }
 
     void drawing(Graphics2D g){
-        for (IFigureHolder figure : Reference.existingFigures){
-
-        }
-
         Reference.existingFigures.forEach(figure -> {
             figure.getAllowedPositionsIndex().forEach(index -> {
                 Reference.placeHolderArrayList.forEach(square -> {
