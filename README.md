@@ -1,4 +1,4 @@
-> root folder mame : JavaGamesProjects
+> root folder name : JavaGamesProjects
 ## There are few mini- not-heavily-coded-games:
 - Tetris
 - Snake
