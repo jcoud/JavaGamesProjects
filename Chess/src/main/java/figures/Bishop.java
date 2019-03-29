@@ -1,26 +1,36 @@
 package figures;
 
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Bishop extends IFigureHolder {
-    public Bishop(int positionIndex, Point positionPoint, String figureID, String uniqueNameInfo, String figureColor) {
-        this.positionIndex = positionIndex;
-        this.positionPoint = positionPoint;
+    Bishop(int pi, Point pp, String figureID, String name, String figureColor) {
+        this.pi = pi;
+        this.pp = pp;
         this.figureID = figureID;
-        this.figureName = figureID + " " + uniqueNameInfo;
+        this.figureName = figureID + " " + name;
         this.figureColor = figureColor;
     }
-/*    @Override
-    public ArrayList<Integer> getAllowedPositionsIndex() {
+    Bishop(){}
+    @Override
+    public ArrayList<Integer> getAllowedPositionsIndex(int pi, Point pp) {
         ArrayList<Integer> temp = new ArrayList<>();
-        if (this.figureColor.equals(BLACK_FIGURE)) {
-            for (int i = this.positionIndex; i >= 0; i=-9) {temp.add(i);}
-            for (a i = this.positionIndex; i <= 64; i=+9) {temp.add(i);}
-        } else {
-
+        int pi_ = pi;
+        Point pp_ = pp;
+        if (pi == -1 && pp == null){
+            pi_ = this.pi;
+            pp_ = this.pp;
+        }
+        for (int i = 1; i <= 8; i++) {
+            if (pp_.x - i >= 0 && pp_.y - i >= 0)
+                temp.add(pi_ - (9 * i));
+            if (pp_.x + i <= 7 && pp_.y + i <= 7)
+                temp.add(pi_ + (9 * i));
+            if (pp_.x + i <= 7 && pp_.y - i >= 0)
+                temp.add(pi_ - (7 * i));
+            if (pp_.x - i >= 0 && pp_.y + i <= 7)
+                temp.add(pi_ + (7 * i));
         }
         return temp;
-    }*/
+    }
 }

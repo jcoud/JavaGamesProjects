@@ -1,22 +1,24 @@
 package figures;
 
-import lombok.Getter;
-
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Queen extends IFigureHolder {
-    public Queen(int positionIndex, Point positionPoint, String figureID, String uniqueNameInfo, String figureColor) {
-        this.positionIndex = positionIndex;
-        this.positionPoint = positionPoint;
+    Queen(int pi, Point pp, String figureID, String name, String figureColor) {
+        this.pi = pi;
+        this.pp = pp;
         this.figureID = figureID;
-        this.figureName = figureID + " " + uniqueNameInfo;
+        this.figureName = figureID + name;
         this.figureColor = figureColor;
     }
-//    @Override
-//    public ArrayList<Integer> getAllowedPositionsIndex() {
-//        return super.getAllowedPositionsIndex();
-//
-//    }
+    @Override
+    public ArrayList<Integer> getAllowedPositionsIndex(int pi, Point pp) {
+        ArrayList<Integer> temp = new ArrayList<>(8);
+        temp.addAll(new Bishop().getAllowedPositionsIndex(this.pi, this.pp));
+        temp.addAll(new King().getAllowedPositionsIndex(this.pi, this.pp));
+        temp.addAll(new Rook().getAllowedPositionsIndex(this.pi, this.pp));
+        ArrayList<Integer> notDupl = new ArrayList<>();
+        temp.forEach(el -> {if (!notDupl.contains(el)) notDupl.add(el);});
+        return notDupl;
+    }
 }

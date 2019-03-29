@@ -1,9 +1,10 @@
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.swing.ImageIcon;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 
 public class Reference {
     static final int
@@ -41,14 +42,17 @@ public class Reference {
         }
         return new Point();
     }
-    static ArrayList<PlaceHolderClass> placeHolderArrayList = new ArrayList<>();
-    static ArrayList<figures.IFigureHolder> existingFigures = new ArrayList<>();
+
+    //todo: set static image for figures to not creating new Object when calling drawing method @ FieldInit#drawing(Graphics2D)
+    static HashMap<String, ImageIcon> iconList = new HashMap<>(12);
+    static ArrayList<PlaceHolderClass> placeHolderArrayList = new ArrayList<>(64);
+    static ArrayList<figures.IFigureHolder> existingFigures = new ArrayList<>(32);
     static int hlHoveredSquare = 0;
     static int hlSelectedFigure = 0;
     static int[] hlSelectedSquare = new int[]{0,0};
     static boolean toggleHeightLightedPlace = false;
     static FieldInit fieldInitRef;
-    static FigureInit figureInitRef;
+    static FigureSet figureSetRef;
     @Getter
     static class Canvas {
         static final int
@@ -61,20 +65,20 @@ public class Reference {
         return new PlaceHolderClass(positionIndex, squarePositionPoint, squareColorName, figurePositionPoint, figureName, figureColor);
     }
     static void updateField(){
-        existingFigures.forEach(figure -> {
-            figure.getAllowedPositionsIndex().forEach(indexPoint -> {
-                if (hlSelectedSquare[0] != 0) {
-                    if (indexPoint == hlSelectedSquare[0]) {
-                        hlSelectedFigure = hlSelectedSquare[0];
-                        figure.setPositionIndex(hlSelectedFigure);
-                    }
-                }
-            });
-        });
-
-        existingFigures.forEach(figure ->{
-            placeHolderArrayList.forEach(square -> {
-                if (figure.getPositionIndex() == square.getPositionIndex()){
+//        existingFigures.forEach(figure -> {
+//            figure.getAllowedPositionsIndex().forEach(indexPoint -> {
+//                if (hlSelectedSquare[0] != 0) {
+//                    if (indexPoint == hlSelectedSquare[0]) {
+//                        hlSelectedFigure = hlSelectedSquare[0];
+//                        figure.setPi(hlSelectedFigure);
+//                    }
+//                }
+//            });
+//        });
+        placeHolderArrayList.forEach(square -> {
+            existingFigures.forEach(figure ->{
+                if (figure.getPi() == square.getPositionIndex()){
+                    square.setFigurePositionPoint(figure.getPp());
                     square.setFigureName(figure.getFigureName());
                     square.setFigureColor(figure.getFigureColor());
                 }

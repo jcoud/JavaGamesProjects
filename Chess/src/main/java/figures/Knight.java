@@ -1,26 +1,37 @@
 package figures;
 
-import lombok.Getter;
-
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Knight extends IFigureHolder {
-    public Knight(int positionIndex, Point positionPoint, String figureID, String uniqueNameInfo, String figureColor) {
-        this.positionIndex = positionIndex;
-        this.positionPoint = positionPoint;
+    Knight(int pi, Point pp, String figureID, String name, String figureColor) {
+        this.pi = pi;
+        this.pp = pp;
         this.figureID = figureID;
-        this.figureName = figureID + " " + uniqueNameInfo;
+        this.figureName = figureID + " " + name;
         this.figureColor = figureColor;
-    }/*
+    }
     @Override
-    public ArrayList<Integer> getAllowedPositionsIndex() {
+    public ArrayList<Integer> getAllowedPositionsIndex(int pi, Point pp) {
         ArrayList<Integer> temp = new ArrayList<>();
-//        if (this.positionIndex + 10 >= 0) {temp.add(this.positionIndex + 10);}
-//        if (this.positionIndex + 17 >= 0) {temp.add(this.positionIndex + 17);}
-//        if (this.positionIndex + 17 >= 0) {temp.add(this.positionIndex + 17);}
-//        if (this.positionIndex + 17 >= 0) {temp.add(this.positionIndex + 17);}
+        if (this.pp.x - 1 >= 0 && this.pp.y - 2 >= 0)
+            temp.add(this.pi - 17);
+        if (this.pp.x - 2 >= 0 && this.pp.y - 1 >= 0)
+            temp.add(this.pi - 10);
+        if (this.pp.x + 1 <= 7 && this.pp.y + 2 <= 7)
+            temp.add(this.pi + 17);
+        if (this.pp.x + 2 <= 7 && this.pp.y + 1 <= 7)
+            temp.add(this.pi + 10);
+
+        if (this.pp.x + 1 <= 7 && this.pp.y - 2 >= 0)
+            temp.add(this.pi - 15);
+        if (this.pp.x + 2 <= 7 && this.pp.y - 1 >= 0)
+            temp.add(this.pi - 6);
+        if (this.pp.x - 1 >= 0 && this.pp.y + 2 <= 7)
+            temp.add(this.pi + 15);
+        if (this.pp.x - 2 >= 0 && this.pp.y + 1 <= 7)
+            temp.add(this.pi + 6);
+
         return temp;
-    }*/
+    }
 }

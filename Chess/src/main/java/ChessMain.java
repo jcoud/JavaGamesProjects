@@ -1,3 +1,6 @@
+import figures.IFigureHolder;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 
@@ -6,7 +9,7 @@ public class ChessMain{
     {
         setupReference();
         JFrame window = new JFrame();
-//        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame.setDefaultLookAndFeelDecorated(true);
         drawing = new Drawing();
         drawing.addMouseListener(new MouseAndKeys.MouseIOAdapter());
 //        drawing.addMouseMotionListener(new MouseAndKeys.MouseIOMotionAdapter());
@@ -15,7 +18,7 @@ public class ChessMain{
         window.addKeyListener(new MouseAndKeys.KeysIO());
         window.getContentPane().setPreferredSize(
             new Dimension(
-                Reference.Canvas.x0 + Reference.Canvas.width + 200,
+                Reference.Canvas.x0 + Reference.Canvas.width,
                 Reference.Canvas.y0 + Reference.Canvas.height
             )
         );
@@ -28,7 +31,15 @@ public class ChessMain{
     }
     private void setupReference(){
         Reference.fieldInitRef = new FieldInit();
-        Reference.figureInitRef = new FigureInit();
+        Reference.figureSetRef = new FigureSet();
+        IFigureHolder.figuresNameList.forEach(name ->{
+            String fileName = "figures/" + name + "_" + IFigureHolder.BLACK_FIGURE + ".png";
+            Reference.iconList.put(name + IFigureHolder.BLACK_FIGURE, new ImageIcon(getClass().getResource(fileName)));
+        });
+        IFigureHolder.figuresNameList.forEach(name ->{
+            String fileName = "figures/" + name + "_" + IFigureHolder.WHITE_FIGURE + ".png";
+            Reference.iconList.put(name + IFigureHolder.WHITE_FIGURE, new ImageIcon(getClass().getResource(fileName)));
+        });
     }
     public static void main(String[] args){ new ChessMain(); }
 }

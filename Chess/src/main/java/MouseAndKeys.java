@@ -12,10 +12,10 @@ class MouseAndKeys {
         @Override
         public void keyPressed(KeyEvent key){
             if (key.getKeyCode() == KeyEvent.VK_X) System.exit(0);
-            if (key.getKeyCode() == KeyEvent.VK_N) {Reference.figureInitRef.setDefault(); drawing.repaint();}
+            if (key.getKeyCode() == KeyEvent.VK_N) {Reference.figureSetRef.setDefault(); drawing.repaint();}
         }
     }
-    static class MouseIOMotionAdapter extends MouseMotionAdapter {
+    /*static class MouseIOMotionAdapter extends MouseMotionAdapter {
         @Override
         public void mouseMoved(MouseEvent mouse) {
             Reference.placeHolderArrayList.forEach((square) -> {
@@ -25,7 +25,7 @@ class MouseAndKeys {
             });
             drawing.repaint();
         }
-    }
+    }*/
     static class MouseIOAdapter extends MouseAdapter {
         private int pt;
         @Override
@@ -45,7 +45,7 @@ class MouseAndKeys {
             }
             Reference.existingFigures.forEach(figure -> {
                 if (Reference.toggleHeightLightedPlace) {
-                    if (figure.getPositionIndex() == Reference.hlSelectedSquare[0]) {
+                    if (figure.getPi() == Reference.hlSelectedSquare[0]) {
                         Reference.hlSelectedFigure = Reference.hlSelectedSquare[0];
 
                         Reference.updateField();
