@@ -118,8 +118,8 @@ class InOut {
         @Override
         public void mousePressed(MouseEvent mouse) {
             if (aBooleanP.get()) {
-                X = (int) Math.floor(mouse.getX() / DrawUtils.BS);
-                Y = (int) Math.floor(mouse.getY() / DrawUtils.BS);
+                X = mouse.getX() / DrawUtils.BS;
+                Y = mouse.getY() / DrawUtils.BS;
                 aBoolean.set(true);
                 synchronized (thread) {
                     thread.notify();

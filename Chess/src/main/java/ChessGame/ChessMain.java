@@ -24,10 +24,6 @@ public class ChessMain {
         InOut.setRepaintComponent(cb);
         Dimension d = new Dimension(cb.getPreferredSize().width + mp.getPreferredSize().width, cb.getPreferredSize().height);
 
-
-
-
-
         GridBagLayout ml = new GridBagLayout();
         GridBagConstraints mc = new GridBagConstraints();
         mainPanel.setLayout(ml);

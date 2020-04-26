@@ -11,16 +11,16 @@ import java.util.ArrayList;
 
 public class ChessBoard extends JPanel {
     private int i = 0;
-    private GameLogic gl = GameLogic.getInstance();
+    private GameLogic gl;
 
     public ChessBoard() {
-
+        gl = GameLogic.getInstance();
         JPanel board = new JPanel() {
             @Override
             public void paint(Graphics g) {
                 super.paint(g);
                 Graphics2D g2 = (Graphics2D) g;
-                g.clearRect(0,0,getWidth(), getHeight());
+                g.clearRect(0, 0, getWidth(), getHeight());
 
                 //pre-draw
                 for (Square square : gl.boardData.fields()) {
@@ -40,9 +40,9 @@ public class ChessBoard extends JPanel {
 
         board.setPreferredSize(new Dimension(DrawUtils.Canvas.width, DrawUtils.Canvas.height));
         board.addMouseListener(new InOut.MouseIOAdapter());
-        for (int i = 0; i < InOut.keyEventList.length; i++){
-            board.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(InOut.keyEventList[i], 0, false), KeyEvent.getKeyText(InOut.keyEventList[i])+"_act");
-            board.getActionMap().put(KeyEvent.getKeyText(InOut.keyEventList[i])+"_act", new InOut.KeysAction(InOut.keyEventList[i]));
+        for (int i = 0; i < InOut.keyEventList.length; i++) {
+            board.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(InOut.keyEventList[i], 0, false), KeyEvent.getKeyText(InOut.keyEventList[i]) + "_act");
+            board.getActionMap().put(KeyEvent.getKeyText(InOut.keyEventList[i]) + "_act", new InOut.KeysAction(InOut.keyEventList[i]));
         }
 //        board.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
         setSize(new Dimension(board.getPreferredSize().width + DrawUtils.GAP * 2, board.getPreferredSize().height + DrawUtils.GAP * 2));
@@ -60,7 +60,7 @@ public class ChessBoard extends JPanel {
         setLayout(ll);
 //        setBorder(BorderFactory.createLineBorder(Color.RED));
 
-//        lc.anchor = GridBagConstraints.WEST;
+
         lc.gridwidth = 2;
         lc.weightx = 1f;
         lc.insets.left = DrawUtils.GAP;
@@ -111,12 +111,11 @@ public class ChessBoard extends JPanel {
                 l.setHorizontalAlignment(JLabel.CENTER);
                 panel.add(l);
             }
-        }
-        else {
+        } else {
             panel.setPreferredSize(new Dimension(DrawUtils.GAP, boardPanel.getPreferredSize().height));
             panel.setLayout(new GridLayout(8, 0));
             for (int i = 0; i < 8; i++) {
-                JLabel l = new JLabel((8-i) + "");
+                JLabel l = new JLabel((8 - i) + "");
                 l.setVerticalAlignment(JLabel.CENTER);
                 l.setFont(panel.getFont());
                 l.setHorizontalAlignment(JLabel.CENTER);
@@ -183,6 +182,7 @@ public class ChessBoard extends JPanel {
             drawFormattedTextWithRect(g, o, x, y + (sh * (strArr.indexOf(o))));
         }
     }
+
     private void drawTextList(Graphics2D g, ArrayList<String> strArr, int x, int y) {
         g.setFont(g.getFont());
         int sh = g.getFontMetrics(g.getFont()).getHeight();
@@ -232,22 +232,18 @@ public class ChessBoard extends JPanel {
                 ArrayList<Integer> w = new ArrayList<>();
                 for (ArrayList<Integer> dir : q) {
                     if (!dir.contains(s.posIndex())) continue;
-                    if (gl.sw_show_rulerSimpleColor) {
-                        int ii = dir.get(dir.size()-1);
-                        Square sq = gl.boardData.getSquare(ii);
-                        if (!sq.isEmpty() && sq.isColorBlack() == !square.getFigure().isColorBlack()) {
-                            g.setColor(Color.RED);
-                        }
-                        else g.setColor(Color.WHITE);
+                    for (int idx = 0; idx < dir.size(); idx++) {
+                        if (gl.sw_show_rulerSimpleColor) {
+                            if (idx == dir.size() - 1 && !gl.boardData.getSquare(dir.get(idx)).isEmpty())
+                                g.setColor(Color.RED);
+                            else g.setColor(Color.WHITE);
+                        } else g.setColor(DrawUtils.getColor(q.indexOf(dir)));
+                        int th = 2;
+                        g.setStroke(new BasicStroke(th));
+                        Point p = GameUtils.indexToPoint(dir.get(idx));
+                        g.drawRect(p.x * DrawUtils.BS + th / 2, p.y * DrawUtils.BS + th / 2, DrawUtils.BS - th, DrawUtils.BS - th);
+                        g.setStroke(new BasicStroke(1));
                     }
-                    else g.setColor(DrawUtils.getColor(q.indexOf(dir)));
-                    int th = 1;
-                    g.setStroke(new BasicStroke(th));
-                    g.drawRect(s.posPoint().x * DrawUtils.BS + th / 2, s.posPoint().y * DrawUtils.BS + th / 2, DrawUtils.BS - th, DrawUtils.BS - th);
-                    g.setColor(new Color(255, 255, 255, 40));
-                    g.fillRect(s.posPoint().x * DrawUtils.BS + th / 2, s.posPoint().y * DrawUtils.BS + th / 2, DrawUtils.BS - th, DrawUtils.BS - th);
-                    g.setStroke(new BasicStroke(1));
-
                     w.addAll(dir);
                 }
                 if (!w.contains(s.posIndex())) {
@@ -259,22 +255,16 @@ public class ChessBoard extends JPanel {
         if (gl.sw_show_rulerDots) {
             int r = DrawUtils.BS / 4;
             for (ArrayList<Integer> dir : q) {
+                if (dir.isEmpty()) continue;
                 int i = q.indexOf(dir);
-                if (gl.sw_show_rulerSimpleColor) {
-                    if (dir.isEmpty()) continue;
-                    int ii = dir.get(dir.size()-1);
-                    Square sq = gl.boardData.getSquare(ii);
-                    if (!sq.isEmpty() && sq.isColorBlack() == !square.getFigure().isColorBlack()) {
-                        g.setColor(Color.RED);
-                    }
-                    else g.setColor(Color.WHITE);
-                }
-                else g.setColor(DrawUtils.getColor(i));
-                for (Integer index : dir) {
-                    if (index > 0) {
-                        Point p = GameUtils.indexToPoint(index);
-                        g.fillOval(p.x * DrawUtils.BS + (DrawUtils.BS - r) / 2, p.y * DrawUtils.BS + (DrawUtils.BS - r) / 2, r, r);
-                    }
+                for (int idx = 0; idx < dir.size(); idx++) {
+                    if (gl.sw_show_rulerSimpleColor) {
+                        if (idx == dir.size() - 1 && !gl.boardData.getSquare(dir.get(idx)).isEmpty())
+                            g.setColor(Color.RED);
+                        else g.setColor(Color.WHITE);
+                    } else g.setColor(DrawUtils.getColor(i));
+                    Point p = GameUtils.indexToPoint(dir.get(idx));
+                    g.fillOval(p.x * DrawUtils.BS + (DrawUtils.BS - r) / 2, p.y * DrawUtils.BS + (DrawUtils.BS - r) / 2, r, r);
                 }
             }
         }
@@ -291,7 +281,7 @@ public class ChessBoard extends JPanel {
         g.setColor(new Color(150, 190, 255));
         int th = 4;
         g.setStroke(new BasicStroke(th));
-        g.drawRect(currP.x * DrawUtils.BS + th/2, currP.y * DrawUtils.BS + th/2 , DrawUtils.BS - th, DrawUtils.BS - th);
+        g.drawRect(currP.x * DrawUtils.BS + th / 2, currP.y * DrawUtils.BS + th / 2, DrawUtils.BS - th, DrawUtils.BS - th);
         g.setStroke(new BasicStroke(1));
 
     }
@@ -318,6 +308,6 @@ public class ChessBoard extends JPanel {
 
     @Override
     public void repaint() {
-            super.repaint();
+        super.repaint();
     }
 }
