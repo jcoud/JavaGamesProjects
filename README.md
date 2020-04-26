@@ -3,4 +3,6 @@
 - Tetris
 - Snake
 - Dots (wip)
-- Chess (wip)
+- Chess
+- Pool
+- Sudoku (wip)
