@@ -4,5 +4,5 @@
 - Snake
 - Dots (wip)
 - Chess
-- Pool
+- Pool (wip)
 - Sudoku (wip)
