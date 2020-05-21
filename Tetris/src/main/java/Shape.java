@@ -1,35 +1,35 @@
+package main.java;
+
 import java.awt.*;
 
 class Shape {
-    private String shapeName;
-    private int[][] shapeArray;
-    private Color shapeColor;
-    private int box = Reference.box;
-    private String[] c = Reference.colorSheet;
-    Shape(int[][] shapeArray, String shapeName){
+    private final int[][] shapeArray;
+    private final Color shapeColor;
+    private final int box = Reference.box;
+
+    Shape(int[][] shapeArray, Logic.ShapeNames shapeName){
         this.shapeArray = shapeArray;
-        this.shapeName = shapeName;
-        switch (this.shapeName){
-            case "o": {shapeColor = Color.decode(c[0]); break;}
-            case "T": {shapeColor = Color.decode(c[1]); break;}
-            case "L": {shapeColor = Color.decode(c[2]); break;}
-            case "J": {shapeColor = Color.decode(c[3]); break;}
-            case "S": {shapeColor = Color.decode(c[4]); break;}
-            case "Z": {shapeColor = Color.decode(c[5]); break;}
-            case "I": {shapeColor = Color.decode(c[6]); break;}
+        String[] c = Reference.st_show_default_shape_color ? Reference.defaultColorSheet : Reference.randomColor;
+        switch (shapeName){
+            case O: {shapeColor = Color.decode(c[0]); break;}
+            case T: {shapeColor = Color.decode(c[1]); break;}
+            case L: {shapeColor = Color.decode(c[2]); break;}
+            case J: {shapeColor = Color.decode(c[3]); break;}
+            case S: {shapeColor = Color.decode(c[4]); break;}
+            case Z: {shapeColor = Color.decode(c[5]); break;}
+            case I: {shapeColor = Color.decode(c[6]); break;}
             default:  {shapeColor = Color.decode(c[7]); break;}
         }
     }
-    void paintShape(Graphics2D g2, int _x, int _y, boolean shadowOn){
-        Color this_color = this.shapeColor;
-//        if (darker) this_color = new Color(this_color.getRed(), this_color.getGreen(), this_color.getBlue(), 60);
+    void paintShape(Graphics2D g2, int _x, int _y, boolean drawShapeProjection){
+        //        if (darker) this_color = new Color(this_color.getRed(), this_color.getGreen(), this_color.getBlue(), 60);
 //        else shapeOutline(g2, _x, _y);
-        if (shadowOn) shadow(g2);
+        if (drawShapeProjection) shapeProjection(g2);
 
         for (int i = 0; i < this.shapeArray.length; i++) {
             for (int j = 0; j < this.shapeArray[0].length; j++) {
                 if (this.shapeArray[i][j] != 0) {
-                    g2.setColor(this_color);
+                    g2.setColor(this.shapeColor);
                     g2.fillRect(i * box + _x - box*2, j * box + _y, box, box);
 //                    g2.setColor(new Color(0,0,0,40));
 //                    g2.setStroke(new BasicStroke(5));
@@ -57,7 +57,7 @@ class Shape {
             }
         }
     }
-    void shadow(Graphics2D g2){
+    private void shapeProjection(Graphics2D g2){
         Point p = Logic.setShadow(this.shapeArray);
         g2.setStroke(new BasicStroke(2));
         for (int i = 0; i < this.shapeArray.length; i++) {
